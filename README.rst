@@ -9,68 +9,7 @@ well most of the modern Tizen-OS TVs with Ethernet or Wi-Fi connectivity.
 Dependencies
 ============
 
-- Python 3
-- ``websocket-client`` (optional, for 2016+ TVs)
-- ``curses`` (optional, for the interactive mode)
-
-Installation
-============
-
-samsungctl can be installed using `pip <(https://pip.pypa.io/>`_:
-
-::
-
-    # pip install samsungctl
-
-Alternatively you can clone the Git repository and run:
-
-::
-
-    # python setup.py install
-
-It's possible to use the command line tool without installation:
-
-::
-
-    $ python -m samsungctl
-
-Command line usage
-==================
-
-You can use ``samsungctl`` command to send keys to a TV:
-
-::
-
-    $ samsungctl --host <host> [options] <key> [key ...]
-
-``host`` is the hostname or IP address of the TV. ``key`` is a key code, e.g.
-``KEY_VOLDOWN``. See `Key codes`_.
-
-There is also an interactive mode (ncurses) for sending the key presses:
-
-::
-
-    $ samsungctl --host <host> [options] --interactive
-
-Use ``samsungctl --help`` for more information about the command line
-arguments:
-
-::
-
-    usage: samsungctl [-h] [--version] [-v] [-q] [-i] [--host HOST] [--port PORT]
-                      [--method METHOD] [--name NAME] [--description DESC]
-                      [--id ID] [--timeout TIMEOUT]
-                      [key [key ...]]
-
-    Remote control Samsung televisions via TCP/IP connection
-
-    positional arguments:
-      key                 keys to be sent (e.g. KEY_VOLDOWN)
-
-    optional arguments:
-      -h, --help          show this help message and exit
-      --version           show program's version number and exit
-      -v, --verbose       increase output verbosity
+- 
       -q, --quiet         suppress non-fatal output
       -i, --interactive   interactive control
       --host HOST         TV hostname or IP address
@@ -106,33 +45,7 @@ constructed using the ``with`` statement:
         # Use the remote object
 
 The constructor takes a configuration dictionary as a parameter. All
-configuration items must be specified.
-
-===========  ======  ===========================================
-Key          Type    Description
-===========  ======  ===========================================
-host         string  Hostname or IP address of the TV.
-port         int     TCP port number. (Default: ``55000``)
-method       string  Connection method (``legacy`` or ``websocket``)
-name         string  Name of the remote controller.
-description  string  Remote controller description.
-id           string  Additional remote controller ID.
-timeout      int     Timeout in seconds. ``0`` means no timeout.
-===========  ======  ===========================================
-
-The ``Remote`` object is very simple and you only need the ``control(key)``
-method. The only parameter is a string naming the key to be sent (e.g.
-``KEY_VOLDOWN``). See `Key codes`_. You can call ``control`` multiple times
-using the same ``Remote`` object. The connection is automatically closed when
-exiting the ``with`` statement.
-
-When something goes wrong you will receive an exception:
-
-=================  =======================================
-Exception          Description
-=================  =======================================
-AccessDenied       The TV does not allow you to send keys.
-ConnectionClosed   The connection was closed.
+configuration was closed.
 UnhandledResponse  An unexpected response was received.
 socket.timeout     The connection timed out.
 =================  =======================================
